@@ -165,14 +165,14 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
           >
-            <Button
-              onClick={() => scrollToSection("contact")}
-              className="rounded-full"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Get in Touch
-            </Button>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                onClick={() => scrollToSection("contact")}
+                className="rounded-full"
+              >
+                Get in Touch
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>

@@ -48,10 +48,10 @@ export default function AnimatedBackground() {
         this.y += this.speedY
 
         // Bounce off edges
-        if (this.x > canvas.width || this.x < 0) {
+        if (canvas && (this.x > canvas.width || this.x < 0)) {
           this.speedX = -this.speedX
         }
-        if (this.y > canvas.height || this.y < 0) {
+        if (canvas && (this.y > canvas.height || this.y < 0)) {
           this.speedY = -this.speedY
         }
 
