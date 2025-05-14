@@ -4,20 +4,24 @@ import { useRef } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
 import { Badge } from "./ui/badge"
 import { motion, useInView } from "framer-motion"
-import { useMousePosition } from "../lib/use-mouse-position"
+import { Github, ExternalLink } from "lucide-react"
+import { Button } from "./ui/button"
 
 export default function ProjectsSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: false, amount: 0.2 })
-  const mousePosition = useMousePosition()
 
   const projects = [
     {
-      title: "AI-Powered 3D Model Generation",
+      title: "3D Reconstruction from Single Images",
       description:
-        "A cutting-edge project focused on 2D-to-3D model generation using GANs, PyTorch, and TensorFlow. The project explores depth estimation techniques like DPT and MiDaS, as well as 3D reconstruction methods including 3D-GAN, NeRF, and SF3D.",
+        "An end-to-end pipeline for transforming 2D images into textured 3D models using AI-powered computer vision techniques. Implements object segmentation, depth estimation, view synthesis, voxel grid creation, and texture mapping to generate detailed 3D representations from single photographs.",
       image: "/placeholder.svg?height=400&width=600",
-      tags: ["AI", "3D Modeling", "PyTorch", "TensorFlow", "GANs"],
+      tags: ["Computer Vision", "Deep Learning", "PyTorch", "3D Modeling", "Mask R-CNN", "MiDaS", "Open3D", "CUDA", "Python"],
+      github: "https://github.com/eminence-bit/single-image-3d-reconstruction",
+      demo: "https://your-demo-link.com",
+      status: "Completed",
+      date: "2024",
     },
     {
       title: "Hackathon at Woxsen University",
@@ -25,6 +29,10 @@ export default function ProjectsSection() {
         "Participated in a 24-hour hackathon with a team of 5 to build an automated data preprocessing and feature selection model. The solution streamlined the data preparation process and improved model accuracy through intelligent feature engineering.",
       image: "/placeholder.svg?height=400&width=600",
       tags: ["Hackathon", "Data Science", "Machine Learning", "Team Project"],
+      github: "https://github.com/eminence-bit/hackathon-project",
+      demo: "https://your-demo-link.com",
+      status: "Completed",
+      date: "2023",
     },
     {
       title: "Personalized Learning Companion",
@@ -32,6 +40,10 @@ export default function ProjectsSection() {
         "A college project involving the creation of an AI-based tool for adaptive learning. The system analyzes student performance and learning patterns to provide personalized content recommendations and study plans, enhancing the educational experience.",
       image: "/placeholder.svg?height=400&width=600",
       tags: ["Education Tech", "AI", "Adaptive Learning", "User Experience"],
+      github: "https://github.com/eminence-bit/learning-companion",
+      demo: "https://your-demo-link.com",
+      status: "Completed",
+      date: "2023",
     },
   ]
 
@@ -58,54 +70,61 @@ export default function ProjectsSection() {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <motion.h2 className="text-3xl font-bold mb-8" variants={itemVariants}>
-          Projects & Interests
-        </motion.h2>
+        <motion.div className="text-center mb-12" variants={itemVariants}>
+          <h2 className="text-4xl font-bold mb-4">Projects & Interests</h2>
+          <p className="text-muted-foreground text-lg">
+            A collection of my recent work and personal projects
+          </p>
+        </motion.div>
         <motion.div className="space-y-12" variants={containerVariants}>
           {projects.map((project, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{
-                scale: 1.02,
-                transition: { duration: 0.2 },
-              }}
-              style={{
-                transform:
-                  mousePosition.x && mousePosition.y
-                    ? `perspective(1000px) rotateY(${(mousePosition.x - window.innerWidth / 2) / 100}deg) rotateX(${-(mousePosition.y - window.innerHeight / 2) / 100}deg)`
-                    : "none",
-                transition: "transform 0.1s ease-out",
-              }}
             >
               <Card className="overflow-hidden border border-border/50 bg-card/50 backdrop-blur-sm">
                 <div className="md:flex">
                   <div className="md:w-1/3 relative h-48 md:h-auto overflow-hidden">
-                    <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.5 }} className="h-full w-full">
+                    <div className="h-full w-full">
                       <img
                         src={project.image || "/placeholder.svg"}
                         alt={project.title}
-                        className="object-cover w-full h-full transition-transform duration-500"
+                        className="object-cover w-full h-full"
                       />
-                    </motion.div>
+                    </div>
                   </div>
                   <div className="md:w-2/3">
                     <CardHeader>
-                      <CardTitle>{project.title}</CardTitle>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <CardTitle className="text-2xl mb-2">{project.title}</CardTitle>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                            <span>{project.status}</span>
+                            <span>•</span>
+                            <span>{project.date}</span>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button variant="ghost" size="icon" asChild>
+                            <a href={project.github} target="_blank" rel="noopener noreferrer">
+                              <Github className="h-5 w-5" />
+                            </a>
+                          </Button>
+                          <Button variant="ghost" size="icon" asChild>
+                            <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                              <ExternalLink className="h-5 w-5" />
+                            </a>
+                          </Button>
+                        </div>
+                      </div>
                     </CardHeader>
                     <CardContent>
-                      <CardDescription className="text-base mb-4">{project.description}</CardDescription>
-                      <div className="flex flex-wrap gap-2 mt-4">
+                      <CardDescription className="text-base mb-6">{project.description}</CardDescription>
+                      <div className="flex flex-wrap gap-2">
                         {project.tags.map((tag, tagIndex) => (
-                          <motion.div
-                            key={tagIndex}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.05 * tagIndex }}
-                            whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
-                          >
-                            <Badge variant="outline">{tag}</Badge>
-                          </motion.div>
+                          <div key={tagIndex}>
+                            <Badge variant="outline" className="text-sm">{tag}</Badge>
+                          </div>
                         ))}
                       </div>
                     </CardContent>

@@ -67,8 +67,8 @@ export default function ContactSection() {
   const socialLinks = [
     {
       icon: <Mail className="h-5 w-5 mr-3" />,
-      text: "mrhunternani22@gmail.com",
-      href: "mailto:mrhunternani22@gmail.com",
+      text: "prajyothnani123@gmail.com",
+      href: "mailto:prajyothnani123@gmail.com",
     },
     {
       icon: <Github className="h-5 w-5 mr-3" />,
