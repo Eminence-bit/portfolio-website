@@ -92,7 +92,7 @@ export default function AboutSection() {
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.05 * skillIndex }}
                       >
-                        <Badge variant="secondary" className="bg-blue-500/20 text-blue-300 border-blue-500/30">{skill}</Badge>
+                        <Badge variant="secondary" className="badge-blue-light">{skill}</Badge>
                       </motion.div>
                     ))}
                   </div>

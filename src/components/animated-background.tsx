@@ -1,9 +1,11 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { useTheme } from "./theme-provider"
 
 export default function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const { theme } = useTheme()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -65,13 +67,19 @@ export default function AnimatedBackground() {
         // Pulsing opacity
         const pulseOpacity = particle.opacity + Math.sin(particle.pulse) * 0.1
 
+        // Different colors for light/dark mode
+        const isDark = theme === 'dark'
+        const particleColor = isDark 
+          ? `rgba(59, 130, 246, ${pulseOpacity})`
+          : `rgba(59, 130, 246, ${pulseOpacity * 0.6})`
+
         // Draw particle with glow effect
         const gradient = ctx.createRadialGradient(
           particle.x, particle.y, 0,
           particle.x, particle.y, particle.size * 4
         )
-        gradient.addColorStop(0, `rgba(59, 130, 246, ${pulseOpacity})`)
-        gradient.addColorStop(1, `rgba(59, 130, 246, 0)`)
+        gradient.addColorStop(0, particleColor)
+        gradient.addColorStop(1, isDark ? 'rgba(59, 130, 246, 0)' : 'rgba(59, 130, 246, 0)')
 
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.size * 4, 0, Math.PI * 2)
@@ -88,7 +96,9 @@ export default function AnimatedBackground() {
       window.removeEventListener("resize", resizeCanvas)
       cancelAnimationFrame(animationId)
     }
-  }, [])
+  }, [theme])
+
+  const isDark = theme === 'dark'
 
   return (
     <div className="fixed inset-0 -z-10">
@@ -96,12 +106,19 @@ export default function AnimatedBackground() {
       <div 
         className="absolute inset-0"
         style={{
-          background: `
-            radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(96, 165, 250, 0.08) 0%, transparent 50%),
-            radial-gradient(circle at 40% 40%, rgba(147, 197, 253, 0.04) 0%, transparent 50%),
-            linear-gradient(135deg, #0a0e1a 0%, #1a1f3a 50%, #0a0e1a 100%)
-          `
+          background: isDark 
+            ? `
+              radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(96, 165, 250, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 40% 40%, rgba(147, 197, 253, 0.04) 0%, transparent 50%),
+              linear-gradient(135deg, #0a0e1a 0%, #1a1f3a 50%, #0a0e1a 100%)
+            `
+            : `
+              radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(96, 165, 250, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 40% 40%, rgba(147, 197, 253, 0.02) 0%, transparent 50%),
+              linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%)
+            `
         }}
       />
       {/* Animated canvas overlay */}

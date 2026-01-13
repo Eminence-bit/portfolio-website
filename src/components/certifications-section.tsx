@@ -149,7 +149,7 @@ export default function CertificationsSection() {
                       <Calendar className="h-4 w-4" />
                       <span>Issued {cert.date}</span>
                     </div>
-                    <Badge variant="secondary" className="bg-blue-500/10 text-blue-300 border-blue-500/20">
+                    <Badge variant="secondary" className="badge-blue-light">
                       {cert.category}
                     </Badge>
                   </div>

@@ -148,7 +148,7 @@ export default function JourneySection() {
                         transition={{ delay: 0.1 * skillIndex }}
                         whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
                       >
-                        <Badge variant="secondary" className="bg-blue-500/10 text-blue-300 border-blue-500/20">
+                        <Badge variant="secondary" className="badge-blue-light">
                           {skill}
                         </Badge>
                       </motion.div>

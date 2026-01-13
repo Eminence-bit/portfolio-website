@@ -109,7 +109,7 @@ export default function ProjectsSection() {
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, tagIndex) => (
                       <div key={tagIndex}>
-                        <Badge variant="outline" className="text-sm bg-blue-500/10 text-blue-300 border-blue-500/30">{tag}</Badge>
+                        <Badge variant="outline" className="text-sm badge-blue-light">{tag}</Badge>
                       </div>
                     ))}
                   </div>
