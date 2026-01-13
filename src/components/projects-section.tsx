@@ -13,37 +13,34 @@ export default function ProjectsSection() {
 
   const projects = [
     {
-      title: "3D Reconstruction from Single Images",
+      title: "🧠 Adaptive Knowledge-Guided Correction (AKGC)",
       description:
-        "An end-to-end pipeline for transforming 2D images into textured 3D models using AI-powered computer vision techniques. Implements object segmentation, depth estimation, view synthesis, voxel grid creation, and texture mapping to generate detailed 3D representations from single photographs.",
-      image: "/placeholder.svg?height=400&width=600",
-      tags: ["Computer Vision", "Deep Learning", "PyTorch", "3D Modeling", "Mask R-CNN", "MiDaS", "Open3D", "CUDA", "Python"],
-      github: "https://github.com/eminence-bit/single-image-3d-reconstruction",
-      demo: "https://your-demo-link.com",
+        "A production-ready framework for detecting and correcting hallucinations in Large Language Models with 100% accuracy across 6 domains and sub-100ms processing times. Uses DistilBERT-based approach with enhanced knowledge graph integration and novel Hallucination Vulnerability Index (HVI). Research paper currently in progress for publication.",
+      tags: ["Python", "DistilBERT", "Knowledge Graphs", "FastAPI", "Docker", "PyTorch", "REST API", "Machine Learning"],
+      github: "https://github.com/Eminence-bit/Adaptive-Knowledge-Guided-Correction_",
+      demo: "https://github.com/Eminence-bit/Adaptive-Knowledge-Guided-Correction_",
+      status: "Production Ready",
+      date: "2025",
+    },
+    {
+      title: "🏔️ Rockfall Prediction Model",
+      description:
+        "A comprehensive machine learning system for predicting rockfall risks in open-pit mines using multi-modal data analysis. Achieves 100% accuracy on mining datasets by combining satellite imagery, geotechnical sensors, environmental data, and advanced feature engineering.",
+      tags: ["Python", "Random Forest", "Gradient Boosting", "Computer Vision", "Satellite Imagery", "Neural Networks"],
+      github: "https://github.com/Eminence-bit/Rockfall-Prediction-Model",
+      demo: "https://github.com/Eminence-bit/Rockfall-Prediction-Model",
       status: "Completed",
       date: "2024",
     },
     {
-      title: "Hackathon at Woxsen University",
+      title: "🌐 Seeker Nexus AI",
       description:
-        "Participated in a 24-hour hackathon with a team of 5 to build an automated data preprocessing and feature selection model. The solution streamlined the data preparation process and improved model accuracy through intelligent feature engineering.",
-      image: "/placeholder.svg?height=400&width=600",
-      tags: ["Hackathon", "Data Science", "Machine Learning", "Team Project"],
-      github: "https://github.com/eminence-bit/hackathon-project",
-      demo: "https://your-demo-link.com",
+        "A comprehensive AI-powered job portal with resume screening capabilities. Combines Python backend with LangGraph agents and modern React frontend to provide intelligent job matching and resume analysis with multi-format support and real-time processing.",
+      tags: ["Python", "FastAPI", "LangGraph", "React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "AI Agents"],
+      github: "https://github.com/Eminence-bit/seeker-nexus-ai",
+      demo: "https://github.com/Eminence-bit/seeker-nexus-ai",
       status: "Completed",
-      date: "2023",
-    },
-    {
-      title: "Personalized Learning Companion",
-      description:
-        "A college project involving the creation of an AI-based tool for adaptive learning. The system analyzes student performance and learning patterns to provide personalized content recommendations and study plans, enhancing the educational experience.",
-      image: "/placeholder.svg?height=400&width=600",
-      tags: ["Education Tech", "AI", "Adaptive Learning", "User Experience"],
-      github: "https://github.com/eminence-bit/learning-companion",
-      demo: "https://your-demo-link.com",
-      status: "Completed",
-      date: "2023",
+      date: "2024",
     },
   ]
 
@@ -82,54 +79,41 @@ export default function ProjectsSection() {
               key={index}
               variants={itemVariants}
             >
-              <Card className="overflow-hidden border border-border/50 bg-card/50 backdrop-blur-sm">
-                <div className="md:flex">
-                  <div className="md:w-1/3 relative h-48 md:h-auto overflow-hidden">
-                    <div className="h-full w-full">
-                      <img
-                        src={project.image || "/placeholder.svg"}
-                        alt={project.title}
-                        className="object-cover w-full h-full"
-                      />
+              <Card className="overflow-hidden card-glow">
+                <CardHeader>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <CardTitle className="text-2xl mb-2">{project.title}</CardTitle>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                        <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">{project.status}</span>
+                        <span>•</span>
+                        <span>{project.date}</span>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button variant="ghost" size="icon" className="hover:bg-blue-500/20" asChild>
+                        <a href={project.github} target="_blank" rel="noopener noreferrer">
+                          <Github className="h-5 w-5" />
+                        </a>
+                      </Button>
+                      <Button variant="ghost" size="icon" className="hover:bg-blue-500/20" asChild>
+                        <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="h-5 w-5" />
+                        </a>
+                      </Button>
                     </div>
                   </div>
-                  <div className="md:w-2/3">
-                    <CardHeader>
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <CardTitle className="text-2xl mb-2">{project.title}</CardTitle>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                            <span>{project.status}</span>
-                            <span>•</span>
-                            <span>{project.date}</span>
-                          </div>
-                        </div>
-                        <div className="flex gap-2">
-                          <Button variant="ghost" size="icon" asChild>
-                            <a href={project.github} target="_blank" rel="noopener noreferrer">
-                              <Github className="h-5 w-5" />
-                            </a>
-                          </Button>
-                          <Button variant="ghost" size="icon" asChild>
-                            <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                              <ExternalLink className="h-5 w-5" />
-                            </a>
-                          </Button>
-                        </div>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-base mb-6">{project.description}</CardDescription>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag, tagIndex) => (
+                      <div key={tagIndex}>
+                        <Badge variant="outline" className="text-sm bg-blue-500/10 text-blue-300 border-blue-500/30">{tag}</Badge>
                       </div>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-base mb-6">{project.description}</CardDescription>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag, tagIndex) => (
-                          <div key={tagIndex}>
-                            <Badge variant="outline" className="text-sm">{tag}</Badge>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
+                    ))}
                   </div>
-                </div>
+                </CardContent>
               </Card>
             </motion.div>
           ))}

@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useMemo } from "react"
 import { Card, CardContent } from "./ui/card"
 import { Badge } from "./ui/badge"
 import { Code, Server, Cpu } from "lucide-react"
@@ -8,39 +8,39 @@ import { motion, useInView } from "framer-motion"
 
 export default function AboutSection() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: false, amount: 0.2 })
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
 
-  const skills = [
+  const skills = useMemo(() => [
+    {
+      category: "AI & Machine Learning",
+      icon: <Cpu className="h-5 w-5" />,
+      items: ["PyTorch", "TensorFlow", "Scikit-learn", "Computer Vision", "NLP", "Knowledge Graphs", "Neural Networks"],
+    },
     {
       category: "Programming",
       icon: <Code className="h-5 w-5" />,
-      items: ["C", "Java", "HTML", "CSS", "JavaScript", "MongoDB", "Node.js"],
+      items: ["Python", "JavaScript", "TypeScript", "C", "Java", "React", "Node.js"],
     },
     {
-      category: "Development",
+      category: "Systems & Tools",
       icon: <Server className="h-5 w-5" />,
-      items: ["React Native", "Flask", "Firebase", "Expo", "Web development"],
+      items: ["FastAPI", "Docker", "AWS", "MongoDB", "PostgreSQL", "Git", "REST APIs"],
     },
-    {
-      category: "AI & ML",
-      icon: <Cpu className="h-5 w-5" />,
-      items: ["Model training", "Prompt engineering", "Automation"],
-    },
-  ]
+  ], [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.05,
       },
     },
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
   }
 
   return (
@@ -56,9 +56,9 @@ export default function AboutSection() {
         </motion.h2>
         <motion.div className="prose dark:prose-invert max-w-none mb-12" variants={itemVariants}>
           <p className="text-lg">
-            I'm a passionate developer with expertise in full-stack development and AI/ML. With a strong foundation in
-            various programming languages and frameworks, I enjoy building innovative solutions that solve real-world
-            problems.
+            I design and build machine-learning systems that combine algorithmic rigor, real-world data, and deployable software.
+            My work spans research-inspired ML models, predictive analytics on real datasets, and full-stack AI applications.
+            I am reserved in casual settings but direct, technical, and collaborative in project and work environments.
           </p>
         </motion.div>
 
@@ -76,7 +76,7 @@ export default function AboutSection() {
                 transition: { duration: 0.2 },
               }}
             >
-              <Card className="h-full overflow-hidden border border-border/50 bg-card/50 backdrop-blur-sm">
+              <Card className="h-full overflow-hidden card-glow">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-2 mb-4">
                     <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
@@ -88,12 +88,11 @@ export default function AboutSection() {
                     {skillGroup.items.map((skill, skillIndex) => (
                       <motion.div
                         key={skillIndex}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.1 * skillIndex }}
-                        whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.05 * skillIndex }}
                       >
-                        <Badge variant="secondary">{skill}</Badge>
+                        <Badge variant="secondary" className="bg-blue-500/20 text-blue-300 border-blue-500/30">{skill}</Badge>
                       </motion.div>
                     ))}
                   </div>

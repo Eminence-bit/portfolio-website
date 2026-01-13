@@ -12,20 +12,28 @@ export default function PositionsSection() {
 
   const positions = [
     {
+      title: "Backend Developer Intern",
+      organization: "Springer Capital",
+      period: "Dec 2024 - Present",
+      description:
+        "Remote backend development internship at Springer Capital, a real estate investment and advisory group with global operations in Hong Kong, China, and North America. Contributing to backend systems and infrastructure for real estate investment platforms and advisory services.",
+      skills: ["Backend Development", "Real Estate Technology", "Investment Platforms", "Remote Work"],
+    },
+    {
+      title: "Member",
+      organization: "VoidX Technologies",
+      period: "2025 - Present",
+      description:
+        "Member of VoidX Technologies, a technology collective and innovation engine that explores, prototypes, and scales ideas from first principles. Contributing to projects that combine disciplined execution with relentless iteration in AI/ML and full-stack development.",
+      skills: ["AI/ML Systems", "Full-Stack Development", "Research-to-Production", "Innovation"],
+    },
+    {
       title: "Technical Lead",
       organization: "Aarna Club",
       period: "Jan 2025 - Present",
       description:
         "Leading technical initiatives and projects, mentoring team members, and implementing innovative solutions to enhance club activities.",
       skills: ["Leadership", "Technical Planning", "Mentoring"],
-    },
-    {
-      title: "Technical Lead",
-      organization: "Suraksha Club",
-      period: "Jan 2025 - Present",
-      description:
-        "Overseeing technical aspects of security-focused projects, coordinating with team members, and ensuring the implementation of best practices in cybersecurity.",
-      skills: ["Cybersecurity", "Team Coordination", "Technical Oversight"],
     },
   ]
 
@@ -66,7 +74,7 @@ export default function PositionsSection() {
                 transition: { duration: 0.2 },
               }}
             >
-              <Card className="border border-border/50 bg-card/50 backdrop-blur-sm">
+              <Card className="card-glow">
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
@@ -93,7 +101,7 @@ export default function PositionsSection() {
                         transition={{ delay: 0.1 * skillIndex }}
                         whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
                       >
-                        <Badge variant="secondary">{skill}</Badge>
+                        <Badge variant="secondary" className="bg-blue-500/20 text-blue-300 border-blue-500/30">{skill}</Badge>
                       </motion.div>
                     ))}
                   </div>

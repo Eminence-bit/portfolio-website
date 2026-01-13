@@ -77,8 +77,8 @@ export default function ContactSection() {
     },
     {
       icon: <Linkedin className="h-5 w-5 mr-3" />,
-      text: "linkedin.com/in/prajyoth",
-      href: "https://www.linkedin.com/in/prajyoth-gandam-0b9a50323",
+      text: "linkedin.com/in/prajyoth-gandam",
+      href: "https://www.linkedin.com/in/prajyoth-gandam-86005a395",
     },
   ]
 
@@ -95,7 +95,7 @@ export default function ContactSection() {
         </motion.h2>
         <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8" variants={containerVariants}>
           <motion.div variants={itemVariants}>
-            <Card className="h-full border border-border/50 bg-card/50 backdrop-blur-sm">
+            <Card className="h-full card-glow">
               <CardHeader>
                 <CardTitle>Contact Form</CardTitle>
                 <CardDescription>Fill out the form below and I'll get back to you as soon as possible.</CardDescription>
@@ -111,7 +111,7 @@ export default function ContactSection() {
                       onChange={handleChange}
                       placeholder="Your name"
                       required
-                      className="bg-background/50"
+                      className="bg-background/50 border-blue-500/30 focus:border-blue-500"
                     />
                   </div>
                   <div className="space-y-2">
@@ -124,7 +124,7 @@ export default function ContactSection() {
                       onChange={handleChange}
                       placeholder="Your email address"
                       required
-                      className="bg-background/50"
+                      className="bg-background/50 border-blue-500/30 focus:border-blue-500"
                     />
                   </div>
                   <div className="space-y-2">
@@ -137,17 +137,17 @@ export default function ContactSection() {
                       placeholder="Your message"
                       rows={4}
                       required
-                      className="bg-background/50"
+                      className="bg-background/50 border-blue-500/30 focus:border-blue-500"
                     />
                   </div>
                   <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                    <Button type="submit" className="w-full" disabled={isSubmitting}>
+                    <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" disabled={isSubmitting}>
                       {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </motion.div>
                   {submitSuccess && (
                     <motion.p
-                      className="text-green-600 dark:text-green-400 text-sm mt-2"
+                      className="text-green-400 text-sm mt-2"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
@@ -161,7 +161,7 @@ export default function ContactSection() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Card className="h-full border border-border/50 bg-card/50 backdrop-blur-sm">
+            <Card className="h-full card-glow">
               <CardHeader>
                 <CardTitle>Connect With Me</CardTitle>
                 <CardDescription>Feel free to reach out through any of these channels.</CardDescription>
@@ -179,12 +179,14 @@ export default function ContactSection() {
                       transition: { duration: 0.2 },
                     }}
                   >
-                    {link.icon}
+                    <div className="text-blue-400">
+                      {link.icon}
+                    </div>
                     <a
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-primary hover:underline"
+                      className="text-blue-300 hover:text-blue-200 hover:underline transition-colors"
                     >
                       {link.text}
                     </a>

@@ -1,13 +1,9 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { useMousePosition } from "../lib/use-mouse-position"
-import { useTheme } from "../components/theme-provider"
 
 export default function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const mousePosition = useMousePosition()
-  const { theme } = useTheme()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -16,130 +12,103 @@ export default function AnimatedBackground() {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    // Set canvas dimensions
-    const setCanvasDimensions = () => {
+    const resizeCanvas = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
     }
 
-    setCanvasDimensions()
-    window.addEventListener("resize", setCanvasDimensions)
+    resizeCanvas()
+    window.addEventListener("resize", resizeCanvas)
 
-    // Particle class
-    class Particle {
+    // Reduced particle count for better performance
+    const particles: Array<{
       x: number
       y: number
+      vx: number
+      vy: number
       size: number
-      speedX: number
-      speedY: number
-      color: string
+      opacity: number
+      pulse: number
+    }> = []
 
-      constructor(x: number, y: number, size: number, speedX: number, speedY: number, color: string) {
-        this.x = x
-        this.y = y
-        this.size = size
-        this.speedX = speedX
-        this.speedY = speedY
-        this.color = color
-      }
-
-      update() {
-        this.x += this.speedX
-        this.y += this.speedY
-
-        // Bounce off edges
-        if (canvas && (this.x > canvas.width || this.x < 0)) {
-          this.speedX = -this.speedX
-        }
-        if (canvas && (this.y > canvas.height || this.y < 0)) {
-          this.speedY = -this.speedY
-        }
-
-        // Mouse interaction
-        if (mousePosition.x && mousePosition.y) {
-          const dx = mousePosition.x - this.x
-          const dy = mousePosition.y - this.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-
-          if (distance < 100) {
-            const angle = Math.atan2(dy, dx)
-            this.speedX -= Math.cos(angle) * 0.1
-            this.speedY -= Math.sin(angle) * 0.1
-          }
-        }
-      }
-
-      draw() {
-        if (!ctx) return
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-        ctx.fillStyle = this.color
-        ctx.fill()
-      }
-    }
-
-    // Create particles
-    const particles: Particle[] = []
-    const particleCount = Math.min(window.innerWidth / 10, 100)
-
-    const getParticleColor = () => {
-      return theme === "dark"
-        ? `rgba(255, 255, 255, ${Math.random() * 0.2 + 0.1})`
-        : `rgba(0, 0, 100, ${Math.random() * 0.2 + 0.1})`
-    }
-
+    // Create fewer particles
+    const particleCount = Math.min(25, Math.floor(window.innerWidth / 60))
     for (let i = 0; i < particleCount; i++) {
-      const size = Math.random() * 5 + 1
-      const x = Math.random() * canvas.width
-      const y = Math.random() * canvas.height
-      const speedX = (Math.random() - 0.5) * 0.5
-      const speedY = (Math.random() - 0.5) * 0.5
-      const color = getParticleColor()
-
-      particles.push(new Particle(x, y, size, speedX, speedY, color))
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: (Math.random() - 0.5) * 0.2,
+        size: Math.random() * 1.5 + 0.5,
+        opacity: Math.random() * 0.3 + 0.1,
+        pulse: Math.random() * Math.PI * 2,
+      })
     }
 
-    // Animation loop
-    const animate = () => {
-      if (!ctx) return
+    let animationId: number
 
+    const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Draw and update particles
+      // Update and draw particles with pulsing effect
       particles.forEach((particle) => {
-        particle.update()
-        particle.draw()
+        particle.x += particle.vx
+        particle.y += particle.vy
+        particle.pulse += 0.015
+
+        // Wrap around edges
+        if (particle.x < 0) particle.x = canvas.width
+        if (particle.x > canvas.width) particle.x = 0
+        if (particle.y < 0) particle.y = canvas.height
+        if (particle.y > canvas.height) particle.y = 0
+
+        // Pulsing opacity
+        const pulseOpacity = particle.opacity + Math.sin(particle.pulse) * 0.1
+
+        // Draw particle with glow effect
+        const gradient = ctx.createRadialGradient(
+          particle.x, particle.y, 0,
+          particle.x, particle.y, particle.size * 4
+        )
+        gradient.addColorStop(0, `rgba(59, 130, 246, ${pulseOpacity})`)
+        gradient.addColorStop(1, `rgba(59, 130, 246, 0)`)
+
+        ctx.beginPath()
+        ctx.arc(particle.x, particle.y, particle.size * 4, 0, Math.PI * 2)
+        ctx.fillStyle = gradient
+        ctx.fill()
       })
 
-      // Draw connections
-      ctx.strokeStyle = theme === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 100, 0.05)"
-      ctx.lineWidth = 0.5
-
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x
-          const dy = particles[i].y - particles[j].y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-
-          if (distance < 100) {
-            ctx.beginPath()
-            ctx.moveTo(particles[i].x, particles[i].y)
-            ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.stroke()
-          }
-        }
-      }
-
-      requestAnimationFrame(animate)
+      animationId = requestAnimationFrame(animate)
     }
 
     animate()
 
     return () => {
-      window.removeEventListener("resize", setCanvasDimensions)
+      window.removeEventListener("resize", resizeCanvas)
+      cancelAnimationFrame(animationId)
     }
-  }, [mousePosition, theme])
+  }, [])
 
-  return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full -z-10" />
+  return (
+    <div className="fixed inset-0 -z-10">
+      {/* Static gradient background */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(96, 165, 250, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(147, 197, 253, 0.04) 0%, transparent 50%),
+            linear-gradient(135deg, #0a0e1a 0%, #1a1f3a 50%, #0a0e1a 100%)
+          `
+        }}
+      />
+      {/* Animated canvas overlay */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 pointer-events-none"
+      />
+    </div>
+  )
 }
-

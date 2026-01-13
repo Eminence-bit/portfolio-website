@@ -63,7 +63,7 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {["about", "projects", "positions", "contact"].map((section, index) => (
+            {["about", "projects", "certifications", "philosophy", "journey", "positions", "contact"].map((section, index) => (
               <motion.button
                 key={section}
                 onClick={() => scrollToSection(section)}
@@ -113,7 +113,7 @@ export default function Header() {
           transition={{ duration: 0.3 }}
         >
           <div className="container mx-auto px-4 py-4 space-y-3">
-            {["about", "projects", "positions", "contact"].map((section, index) => (
+            {["about", "projects", "certifications", "philosophy", "journey", "positions", "contact"].map((section, index) => (
               <motion.button
                 key={section}
                 onClick={() => scrollToSection(section)}
@@ -157,7 +157,7 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
           >
-            Full Stack Developer & AI Enthusiast
+            AI / ML Engineer | Algorithmic Modeling | Full-Stack Systems
           </motion.p>
           <motion.div
             className="mt-8"
