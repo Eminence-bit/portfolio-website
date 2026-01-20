@@ -12,27 +12,27 @@ export default function StatsSection() {
   const stats = useMemo(() => [
     {
       icon: <Code className="h-8 w-8 text-blue-400" />,
-      number: "3+",
-      label: "Production Projects",
-      description: "AI/ML systems deployed",
+      number: "Multiple",
+      label: "Production-Oriented",
+      description: "ML systems deployed",
     },
     {
       icon: <GitBranch className="h-8 w-8 text-blue-400" />,
-      number: "100%",
-      label: "Model Accuracy",
-      description: "Achieved across domains",
+      number: "Research",
+      label: "to Production",
+      description: "ML systems approach",
     },
     {
       icon: <Users className="h-8 w-8 text-blue-400" />,
       number: "2+",
       label: "Organizations",
-      description: "Technical leadership roles",
+      description: "Technical experience",
     },
     {
       icon: <Award className="h-8 w-8 text-blue-400" />,
-      number: "Sub-100ms",
-      label: "Processing Time",
-      description: "Real-time AI systems",
+      number: "Robust",
+      label: "Model Behavior",
+      description: "Focus on deployment constraints",
     },
   ], [])
 

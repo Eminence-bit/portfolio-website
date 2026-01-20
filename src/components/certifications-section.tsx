@@ -11,88 +11,74 @@ export default function CertificationsSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
 
-  const certifications = useMemo(() => [
-    {
-      title: "AWS Academy Graduate - Cloud Architecture",
-      issuer: "Amazon Web Services Training and Certification",
-      date: "May 2025",
-      category: "Cloud",
-      level: "Graduate",
-      color: "bg-orange-500/20 text-orange-300 border-orange-500/30"
-    },
-    {
-      title: "AWS Academy Graduate - Machine Learning Foundations",
-      issuer: "Amazon Web Services Training and Certification", 
-      date: "Apr 2025",
-      category: "AI/ML",
-      level: "Graduate",
-      color: "bg-purple-500/20 text-purple-300 border-purple-500/30"
-    },
-    {
-      title: "Introduction to Large Language Models",
-      issuer: "NPTEL (IIT/IISc)",
-      date: "2025",
-      category: "AI/ML",
-      level: "Academic",
-      color: "bg-purple-500/20 text-purple-300 border-purple-500/30"
-    },
-    {
-      title: "C Programming and Assembly Language",
-      issuer: "NPTEL (IIT/IISc)",
-      date: "2024", 
-      category: "Programming",
-      level: "Academic",
-      color: "bg-yellow-500/20 text-yellow-300 border-yellow-500/30"
-    },
-    {
-      title: "AWS Academy Graduate - Cloud Foundations",
-      issuer: "Amazon Web Services Training and Certification",
-      date: "May 2025", 
-      category: "Cloud",
-      level: "Graduate",
-      color: "bg-orange-500/20 text-orange-300 border-orange-500/30"
-    },
-    {
-      title: "Junior Cybersecurity Analyst Career Path",
-      issuer: "Cisco",
-      date: "May 2025",
-      category: "Security",
-      level: "Career Path",
-      color: "bg-red-500/20 text-red-300 border-red-500/30"
-    },
-    {
-      title: "JavaScript Essentials 1",
-      issuer: "Cisco",
-      date: "Feb 2025",
-      category: "Programming",
-      level: "Essentials",
-      color: "bg-yellow-500/20 text-yellow-300 border-yellow-500/30"
-    },
-    {
-      title: "Getting Started with Artificial Intelligence",
-      issuer: "IBM SkillsBuild",
-      date: "May 2025",
-      category: "AI/ML", 
-      level: "Foundational",
-      color: "bg-purple-500/20 text-purple-300 border-purple-500/30"
-    },
-    {
-      title: "Develop GenAI Apps with Gemini and Streamlit",
-      issuer: "Google Cloud",
-      date: "Sep 2024",
-      category: "AI/ML",
-      level: "Skill Badge",
-      color: "bg-purple-500/20 text-purple-300 border-purple-500/30"
-    },
-    {
-      title: "Network Technician Career Path", 
-      issuer: "Cisco",
-      date: "Nov 2024",
-      category: "Networking",
-      level: "Career Path",
-      color: "bg-blue-500/20 text-blue-300 border-blue-500/30"
-    }
-  ], [])
+  const certifications = useMemo(() => ({
+    "Cloud & Infrastructure": [
+      {
+        title: "AWS Academy Graduate - Cloud Architecture",
+        issuer: "Amazon Web Services Training and Certification",
+        date: "May 2025",
+        level: "Graduate",
+      },
+      {
+        title: "AWS Academy Graduate - Cloud Foundations",
+        issuer: "Amazon Web Services Training and Certification",
+        date: "May 2025", 
+        level: "Graduate",
+      },
+    ],
+    "AI/ML & Data Science": [
+      {
+        title: "AWS Academy Graduate - Machine Learning Foundations",
+        issuer: "Amazon Web Services Training and Certification", 
+        date: "Apr 2025",
+        level: "Graduate",
+      },
+      {
+        title: "Introduction to Large Language Models",
+        issuer: "NPTEL (IIT/IISc)",
+        date: "2025",
+        level: "Academic",
+      },
+      {
+        title: "Getting Started with Artificial Intelligence",
+        issuer: "IBM SkillsBuild",
+        date: "May 2025",
+        level: "Foundational",
+      },
+      {
+        title: "Develop GenAI Apps with Gemini and Streamlit",
+        issuer: "Google Cloud",
+        date: "Sep 2024",
+        level: "Skill Badge",
+      },
+    ],
+    "Programming & Security": [
+      {
+        title: "C Programming and Assembly Language",
+        issuer: "NPTEL (IIT/IISc)",
+        date: "2024", 
+        level: "Academic",
+      },
+      {
+        title: "JavaScript Essentials 1",
+        issuer: "Cisco",
+        date: "Feb 2025",
+        level: "Essentials",
+      },
+      {
+        title: "Junior Cybersecurity Analyst Career Path",
+        issuer: "Cisco",
+        date: "May 2025",
+        level: "Career Path",
+      },
+      {
+        title: "Network Technician Career Path", 
+        issuer: "Cisco",
+        date: "Nov 2024",
+        level: "Career Path",
+      },
+    ],
+  }), [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -118,43 +104,48 @@ export default function CertificationsSection() {
         animate={isInView ? "visible" : "hidden"}
       >
         <motion.div className="text-center mb-12" variants={itemVariants}>
-          <h2 className="text-3xl font-bold mb-4">Certifications & Achievements</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Professional certifications and skill validations across cloud computing, AI/ML, cybersecurity, and software development
+          <h2 className="text-2xl font-bold mb-4">Certifications</h2>
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+            Supporting credentials across cloud computing, AI/ML, and software development
           </p>
         </motion.div>
 
-        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" variants={containerVariants}>
-          {certifications.map((cert, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-            >
-              <Card className="card-glow h-full">
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between mb-2">
-                    <Award className="h-6 w-6 text-blue-400 flex-shrink-0 mt-1" />
-                    <Badge className={cert.color} variant="outline">
-                      {cert.level}
-                    </Badge>
-                  </div>
-                  <CardTitle className="text-lg leading-tight">{cert.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="space-y-3">
-                    <p className="text-sm text-muted-foreground font-medium">
-                      {cert.issuer}
-                    </p>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Calendar className="h-4 w-4" />
-                      <span>Issued {cert.date}</span>
-                    </div>
-                    <Badge variant="secondary" className="badge-blue-light">
-                      {cert.category}
-                    </Badge>
-                  </div>
-                </CardContent>
-              </Card>
+        <motion.div className="space-y-8" variants={containerVariants}>
+          {Object.entries(certifications).map(([category, certs], categoryIndex) => (
+            <motion.div key={category} variants={itemVariants}>
+              <h3 className="text-xl font-semibold mb-4 text-blue-300">{category}</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {certs.map((cert, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+                  >
+                    <Card className="card-glow h-full">
+                      <CardHeader className="pb-3">
+                        <div className="flex items-start justify-between mb-2">
+                          <Award className="h-5 w-5 text-blue-400 flex-shrink-0 mt-1" />
+                          <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30" variant="outline">
+                            {cert.level}
+                          </Badge>
+                        </div>
+                        <CardTitle className="text-base leading-tight">{cert.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="pt-0">
+                        <div className="space-y-2">
+                          <p className="text-xs text-muted-foreground font-medium">
+                            {cert.issuer}
+                          </p>
+                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                            <Calendar className="h-3 w-3" />
+                            <span>Issued {cert.date}</span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
           ))}
         </motion.div>

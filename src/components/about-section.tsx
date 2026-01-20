@@ -56,9 +56,9 @@ export default function AboutSection() {
         </motion.h2>
         <motion.div className="prose dark:prose-invert max-w-none mb-12" variants={itemVariants}>
           <p className="text-lg">
-            I design and build machine-learning systems that combine algorithmic rigor, real-world data, and deployable software.
-            My work spans research-inspired ML models, predictive analytics on real datasets, and full-stack AI applications.
-            I am reserved in casual settings but direct, technical, and collaborative in project and work environments.
+            I design and build production-oriented machine learning systems where model behavior, robustness, and deployment constraints actually matter.
+            My work focuses on translating research-inspired ML ideas into practical pipelines, working with real-world data, and shipping systems that balance accuracy, latency, and maintainability.
+            I am reserved in casual settings, but direct, technical, and collaborative in project and work environments.
           </p>
         </motion.div>
 

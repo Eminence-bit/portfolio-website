@@ -12,23 +12,23 @@ export default function PhilosophySection() {
   const principles = [
     {
       icon: <Brain className="h-6 w-6 text-blue-400" />,
-      title: "Research-Driven",
-      description: "Translating theoretical ML concepts into practical, working systems that solve real problems.",
+      title: "Research-Driven Decisions",
+      description: "Demonstrated through AKGC's knowledge-guided correction pipeline and algorithmic approach to hallucination detection.",
     },
     {
       icon: <Zap className="h-6 w-6 text-blue-400" />,
-      title: "Performance First",
-      description: "Building systems that achieve production-ready performance with sub-100ms processing times.",
+      title: "Production-Oriented Systems",
+      description: "Building deployable ML systems that balance accuracy, latency, and maintainability constraints in real-world environments.",
     },
     {
       icon: <Target className="h-6 w-6 text-blue-400" />,
-      title: "Precision Focus",
-      description: "Delivering 100% accuracy across domains through rigorous algorithmic modeling.",
+      title: "Robustness Focus",
+      description: "Rockfall prediction model demonstrates robust performance across varied terrain and mining conditions through careful evaluation.",
     },
     {
       icon: <Lightbulb className="h-6 w-6 text-blue-400" />,
-      title: "Innovation Mindset",
-      description: "Combining algorithmic rigor with real-world data to create deployable software solutions.",
+      title: "End-to-End Delivery",
+      description: "Seeker Nexus AI showcases full-stack AI system integration from ML logic to usable application deployment.",
     },
   ]
 
@@ -58,8 +58,7 @@ export default function PhilosophySection() {
         <motion.div className="text-center mb-12" variants={itemVariants}>
           <h2 className="text-3xl font-bold mb-4">My Philosophy</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            I believe in building machine learning systems that bridge the gap between research and production,
-            combining theoretical rigor with practical deployment.
+            My approach to building machine learning systems, demonstrated through specific project decisions and technical choices.
           </p>
         </motion.div>
 

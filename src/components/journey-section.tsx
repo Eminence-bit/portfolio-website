@@ -13,43 +13,24 @@ export default function JourneySection() {
   const journeySteps = [
     {
       year: "2025",
-      title: "Backend Developer Intern",
-      company: "Springer Capital",
-      location: "Remote",
-      type: "Professional",
-      description: "Contributing to backend systems for real estate investment platforms with global operations.",
-      skills: ["Backend Development", "Real Estate Tech", "Remote Collaboration"],
-      current: true,
+      title: "AI/ML Engineering Focus",
+      type: "Current",
+      description: "Production-oriented ML systems, research-to-deployment pipelines, and technical leadership roles.",
+      skills: ["Production ML", "Research", "Leadership"],
     },
     {
-      year: "2025",
-      title: "AI/ML Research & Development",
-      company: "Independent Projects",
-      location: "Research",
+      year: "2024",
+      title: "Full-Stack AI Development",
+      type: "Development",
+      description: "Built end-to-end AI applications combining backend systems with intelligent processing capabilities.",
+      skills: ["Full-Stack", "AI Systems", "Deployment"],
+    },
+    {
+      year: "2024",
+      title: "Research & Innovation",
       type: "Research",
-      description: "Developed production-ready AI systems including AKGC framework and rockfall prediction models. Research paper for AKGC currently in progress for publication.",
-      skills: ["PyTorch", "Knowledge Graphs", "Computer Vision", "Production ML", "Research Publication"],
-      current: true,
-    },
-    {
-      year: "2025",
-      title: "VoidX Technologies Member",
-      company: "VoidX Technologies",
-      location: "Technology Collective",
-      type: "Innovation",
-      description: "Contributing to cutting-edge projects that combine disciplined execution with innovation.",
-      skills: ["Full-Stack Development", "AI/ML Systems", "Innovation"],
-      current: true,
-    },
-    {
-      year: "2025",
-      title: "Technical Leadership",
-      company: "Aarna Club",
-      location: "Leadership",
-      type: "Leadership",
-      description: "Leading technical initiatives and mentoring team members in innovative projects.",
-      skills: ["Leadership", "Mentoring", "Technical Planning"],
-      current: true,
+      description: "Developed novel approaches to ML robustness and hallucination detection in production environments.",
+      skills: ["Research", "Innovation", "ML Theory"],
     },
   ]
 
@@ -70,14 +51,12 @@ export default function JourneySection() {
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case "Professional":
+      case "Current":
         return "bg-green-500/20 text-green-300 border-green-500/30"
+      case "Development":
+        return "bg-blue-500/20 text-blue-300 border-blue-500/30"
       case "Research":
         return "bg-purple-500/20 text-purple-300 border-purple-500/30"
-      case "Innovation":
-        return "bg-blue-500/20 text-blue-300 border-blue-500/30"
-      case "Leadership":
-        return "bg-orange-500/20 text-orange-300 border-orange-500/30"
       default:
         return "bg-blue-500/20 text-blue-300 border-blue-500/30"
     }
@@ -94,7 +73,7 @@ export default function JourneySection() {
         <motion.div className="text-center mb-12" variants={itemVariants}>
           <h2 className="text-3xl font-bold mb-4">Professional Journey</h2>
           <p className="text-lg text-muted-foreground">
-            My path through AI/ML engineering, research, and technical leadership
+            Key phases in my AI/ML engineering development
           </p>
         </motion.div>
 
@@ -108,12 +87,7 @@ export default function JourneySection() {
                 transition: { duration: 0.2 },
               }}
             >
-              <Card className={`card-glow relative ${step.current ? 'ring-2 ring-blue-500/50' : ''}`}>
-                {step.current && (
-                  <div className="absolute -top-2 -right-2">
-                    <Badge className="bg-blue-500 text-white">Current</Badge>
-                  </div>
-                )}
+              <Card className="card-glow">
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
@@ -124,16 +98,6 @@ export default function JourneySection() {
                         </Badge>
                       </div>
                       <CardTitle className="text-xl mb-1">{step.title}</CardTitle>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="h-4 w-4" />
-                          {step.company}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <MapPin className="h-4 w-4" />
-                          {step.location}
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </CardHeader>

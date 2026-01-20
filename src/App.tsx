@@ -20,10 +20,10 @@ function App() {
           <AboutSection />
           <StatsSection />
           <ProjectsSection />
-          <CertificationsSection />
           <PhilosophySection />
           <JourneySection />
           <PositionsSection />
+          <CertificationsSection />
           <ContactSection />
         </div>
         <Footer />

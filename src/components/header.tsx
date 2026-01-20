@@ -157,20 +157,29 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
           >
-            AI / ML Engineer | Algorithmic Modeling | Full-Stack Systems
+            AI / ML Engineer focused on production-oriented machine learning systems where model behavior, robustness, and deployment constraints matter.
           </motion.p>
           <motion.div
-            className="mt-8"
+            className="mt-8 flex flex-col sm:flex-row gap-4 justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
-                onClick={() => scrollToSection("contact")}
+                onClick={() => scrollToSection("projects")}
                 className="rounded-full"
               >
-                Get in Touch
+                View Flagship Project
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                onClick={() => scrollToSection("projects")}
+                variant="outline"
+                className="rounded-full"
+              >
+                Explore Projects
               </Button>
             </motion.div>
           </motion.div>

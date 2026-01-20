@@ -15,17 +15,18 @@ export default function ProjectsSection() {
     {
       title: "🧠 Adaptive Knowledge-Guided Correction (AKGC)",
       description:
-        "A production-ready framework for detecting and correcting hallucinations in Large Language Models with 100% accuracy across 6 domains and sub-100ms processing times. Uses DistilBERT-based approach with enhanced knowledge graph integration and novel Hallucination Vulnerability Index (HVI). Research paper currently in progress for publication.",
+        "A production-oriented framework for detecting and correcting hallucinations in Large Language Models. Demonstrates research-to-production ML systems with robust evaluation methodology and deployment-aware engineering constraints.",
       tags: ["Python", "DistilBERT", "Knowledge Graphs", "FastAPI", "Docker", "PyTorch", "REST API", "Machine Learning"],
       github: "https://github.com/Eminence-bit/Adaptive-Knowledge-Guided-Correction_",
       demo: "https://github.com/Eminence-bit/Adaptive-Knowledge-Guided-Correction_",
-      status: "Production Ready",
+      status: "Flagship Project",
       date: "2025",
+      flagship: true,
     },
     {
       title: "🏔️ Rockfall Prediction Model",
       description:
-        "A comprehensive machine learning system for predicting rockfall risks in open-pit mines using multi-modal data analysis. Achieves 100% accuracy on mining datasets by combining satellite imagery, geotechnical sensors, environmental data, and advanced feature engineering.",
+        "A comprehensive machine learning system for predicting rockfall risks in open-pit mines using multi-modal data analysis. Demonstrates robust model performance on domain-specific mining datasets through advanced feature engineering and ensemble methods.",
       tags: ["Python", "Random Forest", "Gradient Boosting", "Computer Vision", "Satellite Imagery", "Neural Networks"],
       github: "https://github.com/Eminence-bit/Rockfall-Prediction-Model",
       demo: "https://github.com/Eminence-bit/Rockfall-Prediction-Model",
@@ -68,9 +69,9 @@ export default function ProjectsSection() {
         animate={isInView ? "visible" : "hidden"}
       >
         <motion.div className="text-center mb-12" variants={itemVariants}>
-          <h2 className="text-4xl font-bold mb-4">Projects & Interests</h2>
+          <h2 className="text-4xl font-bold mb-4">Selected Work</h2>
           <p className="text-muted-foreground text-lg">
-            A collection of my recent work and personal projects
+            Production-oriented machine learning systems and technical projects
           </p>
         </motion.div>
         <motion.div className="space-y-12" variants={containerVariants}>
@@ -79,13 +80,20 @@ export default function ProjectsSection() {
               key={index}
               variants={itemVariants}
             >
-              <Card className="overflow-hidden card-glow">
+              <Card className={`overflow-hidden ${project.flagship ? 'ring-2 ring-blue-500/50 bg-gradient-to-br from-blue-500/5 to-purple-500/5' : ''} card-glow`}>
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
-                      <CardTitle className="text-2xl mb-2">{project.title}</CardTitle>
+                      <div className="flex items-center gap-2 mb-2">
+                        <CardTitle className="text-2xl">{project.title}</CardTitle>
+                        {project.flagship && (
+                          <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30" variant="outline">
+                            Flagship
+                          </Badge>
+                        )}
+                      </div>
                       <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                        <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">{project.status}</span>
+                        <span className={`px-2 py-1 rounded-full text-xs ${project.flagship ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-500/20 text-blue-300'}`}>{project.status}</span>
                         <span>•</span>
                         <span>{project.date}</span>
                       </div>
