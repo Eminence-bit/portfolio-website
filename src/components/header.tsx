@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import { ModeToggle } from "./mode-toggle"
 import { Menu, X } from "lucide-react"
 import { Button } from "./ui/button"
@@ -166,11 +167,10 @@ export default function Header() {
             transition={{ duration: 0.7, delay: 0.5 }}
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                onClick={() => scrollToSection("projects")}
-                className="rounded-full"
-              >
-                View Flagship Project
+              <Button asChild className="rounded-full">
+                <Link to="/projects/akgc">
+                  View Flagship Project
+                </Link>
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

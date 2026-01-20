@@ -1,10 +1,11 @@
 "use client"
 
 import { useRef } from "react"
+import { Link } from "react-router-dom"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
 import { Badge } from "./ui/badge"
 import { motion, useInView } from "framer-motion"
-import { Github, ExternalLink } from "lucide-react"
+import { Github, ExternalLink, ArrowRight } from "lucide-react"
 import { Button } from "./ui/button"
 
 export default function ProjectsSection() {
@@ -109,18 +110,35 @@ export default function ProjectsSection() {
                           <ExternalLink className="h-5 w-5" />
                         </a>
                       </Button>
+                      {project.flagship && (
+                        <Button variant="ghost" size="icon" className="hover:bg-blue-500/20" asChild>
+                          <Link to="/projects/akgc">
+                            <ArrowRight className="h-5 w-5" />
+                          </Link>
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-base mb-6">{project.description}</CardDescription>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag, tagIndex) => (
                       <div key={tagIndex}>
                         <Badge variant="outline" className="text-sm badge-blue-light">{tag}</Badge>
                       </div>
                     ))}
                   </div>
+                  {project.flagship && (
+                    <div className="mt-4">
+                      <Button asChild className="w-full">
+                        <Link to="/projects/akgc">
+                          <ArrowRight className="h-4 w-4 mr-2" />
+                          View Technical Deep Dive
+                        </Link>
+                      </Button>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>
