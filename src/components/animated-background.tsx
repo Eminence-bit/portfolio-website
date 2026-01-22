@@ -22,7 +22,6 @@ export default function AnimatedBackground() {
     resizeCanvas()
     window.addEventListener("resize", resizeCanvas)
 
-    // Reduced particle count for better performance
     const particles: Array<{
       x: number
       y: number
@@ -33,15 +32,14 @@ export default function AnimatedBackground() {
       pulse: number
     }> = []
 
-    // Create fewer particles
-    const particleCount = Math.min(25, Math.floor(window.innerWidth / 60))
+    const particleCount = Math.min(30, Math.floor(window.innerWidth / 50))
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.2,
-        vy: (Math.random() - 0.5) * 0.2,
-        size: Math.random() * 1.5 + 0.5,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15,
+        size: Math.random() * 2 + 0.5,
         opacity: Math.random() * 0.3 + 0.1,
         pulse: Math.random() * Math.PI * 2,
       })
@@ -52,38 +50,41 @@ export default function AnimatedBackground() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Update and draw particles with pulsing effect
+      const isDark = theme === 'dark'
+
+      // Update and draw particles
       particles.forEach((particle) => {
         particle.x += particle.vx
         particle.y += particle.vy
-        particle.pulse += 0.015
+        particle.pulse += 0.01
 
-        // Wrap around edges
         if (particle.x < 0) particle.x = canvas.width
         if (particle.x > canvas.width) particle.x = 0
         if (particle.y < 0) particle.y = canvas.height
         if (particle.y > canvas.height) particle.y = 0
 
-        // Pulsing opacity
         const pulseOpacity = particle.opacity + Math.sin(particle.pulse) * 0.1
 
-        // Different colors for light/dark mode
-        const isDark = theme === 'dark'
-        const particleColor = isDark 
+        const particleColor = isDark
           ? `rgba(59, 130, 246, ${pulseOpacity})`
-          : `rgba(59, 130, 246, ${pulseOpacity * 0.6})`
-
-        // Draw particle with glow effect
-        const gradient = ctx.createRadialGradient(
-          particle.x, particle.y, 0,
-          particle.x, particle.y, particle.size * 4
-        )
-        gradient.addColorStop(0, particleColor)
-        gradient.addColorStop(1, isDark ? 'rgba(59, 130, 246, 0)' : 'rgba(59, 130, 246, 0)')
+          : `rgba(37, 99, 235, ${pulseOpacity * 0.5})`
 
         ctx.beginPath()
-        ctx.arc(particle.x, particle.y, particle.size * 4, 0, Math.PI * 2)
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
+        ctx.fillStyle = particleColor
+        ctx.fill()
+
+        // Glow effect
+        const gradient = ctx.createRadialGradient(
+          particle.x, particle.y, 0,
+          particle.x, particle.y, particle.size * 6
+        )
+        gradient.addColorStop(0, isDark ? 'rgba(59, 130, 246, 0.2)' : 'rgba(37, 99, 235, 0.1)')
+        gradient.addColorStop(1, 'transparent')
+
         ctx.fillStyle = gradient
+        ctx.beginPath()
+        ctx.arc(particle.x, particle.y, particle.size * 6, 0, Math.PI * 2)
         ctx.fill()
       })
 
@@ -101,27 +102,18 @@ export default function AnimatedBackground() {
   const isDark = theme === 'dark'
 
   return (
-    <div className="fixed inset-0 -z-10">
-      {/* Static gradient background */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: isDark 
-            ? `
-              radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(96, 165, 250, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 40% 40%, rgba(147, 197, 253, 0.04) 0%, transparent 50%),
-              linear-gradient(135deg, #0a0e1a 0%, #1a1f3a 50%, #0a0e1a 100%)
-            `
-            : `
-              radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(96, 165, 250, 0.03) 0%, transparent 50%),
-              radial-gradient(circle at 40% 40%, rgba(147, 197, 253, 0.02) 0%, transparent 50%),
-              linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%)
-            `
-        }}
-      />
-      {/* Animated canvas overlay */}
+    <div className="fixed inset-0 -z-10 overflow-hidden">
+      {/* Dynamic gradients */}
+      <div className="absolute inset-0 bg-background transition-colors duration-500" />
+
+      <div className="absolute top-0 left-0 w-full h-full opacity-30">
+        <div className={`absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob ${isDark ? 'bg-purple-900/30' : 'bg-purple-300/30'}`} />
+        <div className={`absolute top-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob animation-delay-2000 ${isDark ? 'bg-blue-900/30' : 'bg-blue-300/30'}`} />
+        <div className={`absolute -bottom-32 left-[20%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob animation-delay-4000 ${isDark ? 'bg-indigo-900/30' : 'bg-indigo-300/30'}`} />
+      </div>
+
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+
       <canvas
         ref={canvasRef}
         className="absolute inset-0 pointer-events-none"

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Header from "./components/header"
+import Header, { HeroSection } from "./components/header"
 import AboutSection from "./components/about-section"
 import StatsSection from "./components/stats-section"
 import ProjectsSection from "./components/projects-section"
@@ -17,7 +17,8 @@ function HomePage() {
   return (
     <>
       <Header />
-      <div className="container mx-auto px-4 py-8">
+      <HeroSection />
+      <div className="container mx-auto px-4 py-12 space-y-24">
         <AboutSection />
         <StatsSection />
         <ProjectsSection />
@@ -36,7 +37,7 @@ function App() {
   return (
     <Router>
       <AnimatedBackground />
-      <main className="min-h-screen bg-background/80 backdrop-blur-sm">
+      <main className="min-h-screen bg-transparent relative overflow-x-hidden selection:bg-primary/20">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/projects/akgc" element={<AKGCDeepDive />} />

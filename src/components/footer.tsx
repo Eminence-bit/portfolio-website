@@ -15,11 +15,11 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="bg-muted/50 backdrop-blur-sm py-8">
+    <footer className="bg-background/80 backdrop-blur-md border-t border-border/50 py-12">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <motion.div
-            className="mb-4 md:mb-0"
+            className="text-center md:text-left"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -27,19 +27,22 @@ export default function Footer() {
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} G Prajyoth. All rights reserved.
             </p>
+            <p className="text-xs text-muted-foreground mt-2">
+              Built with React, Tailwind CSS, and Framer Motion
+            </p>
           </motion.div>
-          <div className="flex space-x-4">
+          <div className="flex space-x-6">
             {socialLinks.map((link, index) => (
               <motion.a
                 key={index}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors p-2 hover:bg-primary/10 rounded-full"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                whileHover={{ y: -3, transition: { duration: 0.2 } }}
               >
                 {link.icon}
                 <span className="sr-only">{link.label}</span>

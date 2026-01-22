@@ -11,22 +11,22 @@ export default function PhilosophySection() {
 
   const principles = [
     {
-      icon: <Brain className="h-6 w-6 text-blue-400" />,
+      icon: <Brain className="h-6 w-6 text-primary" />,
       title: "Research-Driven Decisions",
       description: "Demonstrated through AKGC's knowledge-guided correction pipeline and algorithmic approach to hallucination detection.",
     },
     {
-      icon: <Zap className="h-6 w-6 text-blue-400" />,
+      icon: <Zap className="h-6 w-6 text-primary" />,
       title: "Production-Oriented Systems",
       description: "Building deployable ML systems that balance accuracy, latency, and maintainability constraints in real-world environments.",
     },
     {
-      icon: <Target className="h-6 w-6 text-blue-400" />,
+      icon: <Target className="h-6 w-6 text-primary" />,
       title: "Robustness Focus",
       description: "Rockfall prediction model demonstrates robust performance across varied terrain and mining conditions through careful evaluation.",
     },
     {
-      icon: <Lightbulb className="h-6 w-6 text-blue-400" />,
+      icon: <Lightbulb className="h-6 w-6 text-primary" />,
       title: "End-to-End Delivery",
       description: "Seeker Nexus AI showcases full-stack AI system integration from ML logic to usable application deployment.",
     },
@@ -48,15 +48,15 @@ export default function PhilosophySection() {
   }
 
   return (
-    <section id="philosophy" className="py-16" ref={ref}>
+    <section id="philosophy" className="py-20" ref={ref}>
       <motion.div
-        className="max-w-4xl mx-auto"
+        className="max-w-5xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <motion.div className="text-center mb-12" variants={itemVariants}>
-          <h2 className="text-3xl font-bold mb-4">My Philosophy</h2>
+        <motion.div className="text-center mb-16" variants={itemVariants}>
+          <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">My Philosophy</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             My approach to building machine learning systems, demonstrated through specific project decisions and technical choices.
           </p>
@@ -68,23 +68,23 @@ export default function PhilosophySection() {
               key={index}
               variants={itemVariants}
               whileHover={{
-                scale: 1.02,
+                y: -5,
                 transition: { duration: 0.2 },
               }}
             >
-              <Card className="card-glow h-full">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
+              <Card className="card-glow h-full border-primary/5 hover:border-primary/20 transition-all">
+                <CardContent className="p-6 md:p-8">
+                  <div className="flex items-start gap-5">
                     <motion.div
-                      className="flex-shrink-0 p-2 bg-blue-500/20 rounded-lg"
-                      whileHover={{ rotate: 360 }}
+                      className="flex-shrink-0 p-3 bg-primary/10 rounded-xl"
+                      whileHover={{ rotate: 360, scale: 1.1 }}
                       transition={{ duration: 0.5 }}
                     >
                       {principle.icon}
                     </motion.div>
                     <div>
-                      <h3 className="text-xl font-semibold mb-2">{principle.title}</h3>
-                      <p className="text-muted-foreground">{principle.description}</p>
+                      <h3 className="text-xl font-heading font-semibold mb-3">{principle.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed">{principle.description}</p>
                     </div>
                   </div>
                 </CardContent>

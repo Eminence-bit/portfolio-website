@@ -10,14 +10,14 @@ import { Button } from "./ui/button"
 
 export default function ProjectsSection() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: false, amount: 0.2 })
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
 
   const projects = [
     {
-      title: "🧠 Adaptive Knowledge-Guided Correction (AKGC)",
+      title: "Adaptive Knowledge-Guided Correction",
       description:
-        "A production-oriented framework for detecting and correcting hallucinations in Large Language Models. Demonstrates research-to-production ML systems with robust evaluation methodology and deployment-aware engineering constraints.",
-      tags: ["Python", "DistilBERT", "Knowledge Graphs", "FastAPI", "Docker", "PyTorch", "REST API", "Machine Learning"],
+        "A production-oriented framework for detecting and correcting hallucinations in Large Language Models. Demonstrates research-to-production ML systems with robust evaluation methodology.",
+      tags: ["Python", "DistilBERT", "Knowledge Graphs", "FastAPI", "Docker", "PyTorch"],
       github: "https://github.com/Eminence-bit/Adaptive-Knowledge-Guided-Correction_",
       demo: "https://github.com/Eminence-bit/Adaptive-Knowledge-Guided-Correction_",
       status: "Flagship Project",
@@ -25,20 +25,20 @@ export default function ProjectsSection() {
       flagship: true,
     },
     {
-      title: "🏔️ Rockfall Prediction Model",
+      title: "Rockfall Prediction Model",
       description:
-        "A comprehensive machine learning system for predicting rockfall risks in open-pit mines using multi-modal data analysis. Demonstrates robust model performance on domain-specific mining datasets through advanced feature engineering and ensemble methods.",
-      tags: ["Python", "Random Forest", "Gradient Boosting", "Computer Vision", "Satellite Imagery", "Neural Networks"],
+        "Comprehensive machine learning system for predicting rockfall risks in open-pit mines using multi-modal data analysis and computer vision.",
+      tags: ["Python", "Random Forest", "Computer Vision", "Satellite Imagery"],
       github: "https://github.com/Eminence-bit/Rockfall-Prediction-Model",
       demo: "https://github.com/Eminence-bit/Rockfall-Prediction-Model",
       status: "Completed",
       date: "2024",
     },
     {
-      title: "🌐 Seeker Nexus AI",
+      title: "Seeker Nexus AI",
       description:
-        "A comprehensive AI-powered job portal with resume screening capabilities. Combines Python backend with LangGraph agents and modern React frontend to provide intelligent job matching and resume analysis with multi-format support and real-time processing.",
-      tags: ["Python", "FastAPI", "LangGraph", "React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "AI Agents"],
+        "AI-powered job portal offering intelligent job matching and resume analysis using LangGraph agents and modern React frontend.",
+      tags: ["Python", "LangGraph", "React", "TypeScript", "Supabase"],
       github: "https://github.com/Eminence-bit/seeker-nexus-ai",
       demo: "https://github.com/Eminence-bit/seeker-nexus-ai",
       status: "Completed",
@@ -51,95 +51,93 @@ export default function ProjectsSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
       },
     },
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   }
 
   return (
-    <section id="projects" className="py-16" ref={ref}>
+    <section id="projects" className="py-20 relative" ref={ref}>
+      <div className="absolute top-1/2 left-0 w-full h-[500px] bg-primary/5 -skew-y-3 -z-10" />
+
       <motion.div
-        className="max-w-4xl mx-auto"
+        className="max-w-6xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <motion.div className="text-center mb-12" variants={itemVariants}>
-          <h2 className="text-4xl font-bold mb-4">Selected Work</h2>
-          <p className="text-muted-foreground text-lg">
-            Production-oriented machine learning systems and technical projects
+        <motion.div className="text-center mb-16" variants={itemVariants}>
+          <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">Selected Work</h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Production-oriented machine learning systems and technical projects showcasing
+            deployment-aware engineering.
           </p>
         </motion.div>
-        <motion.div className="space-y-12" variants={containerVariants}>
+
+        <motion.div className="grid grid-cols-1 gap-8" variants={containerVariants}>
           {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-            >
-              <Card className={`overflow-hidden ${project.flagship ? 'ring-2 ring-blue-500/50 bg-gradient-to-br from-blue-500/5 to-purple-500/5' : ''} card-glow`}>
-                <CardHeader>
-                  <div className="flex justify-between items-start">
+            <motion.div key={index} variants={itemVariants}>
+              <Card
+                className={`overflow-hidden transition-all duration-300 ${project.flagship
+                  ? 'border-primary/20 bg-gradient-to-br from-primary/5 via-background to-background shadow-xl'
+                  : 'bg-card/50 hover:bg-card/80'} card-glow`}
+              >
+                <div className="flex flex-col md:flex-row h-full">
+                  <div className="flex-1 p-6 md:p-8 flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <CardTitle className="text-2xl">{project.title}</CardTitle>
-                        {project.flagship && (
-                          <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30" variant="outline">
-                            Flagship
-                          </Badge>
-                        )}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-3">
+                          <h3 className="text-2xl font-heading font-semibold group-hover:text-primary transition-colors">
+                            {project.title}
+                          </h3>
+                          {project.flagship && (
+                            <Badge variant="default" className="bg-primary/20 text-primary border-primary/20 hover:bg-primary/30">
+                              Flagship
+                            </Badge>
+                          )}
+                        </div>
+                        <span className="text-sm text-muted-foreground hidden sm:inline-block">{project.date}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                        <span className={`px-2 py-1 rounded-full text-xs ${project.flagship ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-500/20 text-blue-300'}`}>{project.status}</span>
-                        <span>•</span>
-                        <span>{project.date}</span>
+
+                      <p className="text-muted-foreground mb-6 leading-relaxed">
+                        {project.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {project.tags.map((tag) => (
+                          <Badge key={tag} variant="secondary" className="px-3 py-1 bg-secondary/50 backdrop-blur-sm border-white/5">
+                            {tag}
+                          </Badge>
+                        ))}
                       </div>
                     </div>
-                    <div className="flex gap-2">
-                      <Button variant="ghost" size="icon" className="hover:bg-blue-500/20" asChild>
+
+                    <div className="flex items-center gap-4 pt-4 border-t border-border/50">
+                      <Button variant="ghost" size="sm" className="gap-2 hover:bg-primary/10 hover:text-primary" asChild>
                         <a href={project.github} target="_blank" rel="noopener noreferrer">
-                          <Github className="h-5 w-5" />
+                          <Github className="w-4 h-4" /> Code
                         </a>
                       </Button>
-                      <Button variant="ghost" size="icon" className="hover:bg-blue-500/20" asChild>
+                      <Button variant="ghost" size="sm" className="gap-2 hover:bg-primary/10 hover:text-primary" asChild>
                         <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="h-5 w-5" />
+                          <ExternalLink className="w-4 h-4" /> Demo
                         </a>
                       </Button>
                       {project.flagship && (
-                        <Button variant="ghost" size="icon" className="hover:bg-blue-500/20" asChild>
+                        <Button size="sm" className="ml-auto gap-2 rounded-full shadow-lg hover:shadow-primary/25" asChild>
                           <Link to="/projects/akgc">
-                            <ArrowRight className="h-5 w-5" />
+                            Case Study <ArrowRight className="w-4 h-4" />
                           </Link>
                         </Button>
                       )}
                     </div>
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base mb-6">{project.description}</CardDescription>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag, tagIndex) => (
-                      <div key={tagIndex}>
-                        <Badge variant="outline" className="text-sm badge-blue-light">{tag}</Badge>
-                      </div>
-                    ))}
-                  </div>
-                  {project.flagship && (
-                    <div className="mt-4">
-                      <Button asChild className="w-full">
-                        <Link to="/projects/akgc">
-                          <ArrowRight className="h-4 w-4 mr-2" />
-                          View Technical Deep Dive
-                        </Link>
-                      </Button>
-                    </div>
-                  )}
-                </CardContent>
+                </div>
               </Card>
             </motion.div>
           ))}

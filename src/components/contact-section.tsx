@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/
 import { Input } from "./ui/input"
 import { Label } from "./ui/label"
 import { Textarea } from "./ui/textarea"
-import { Github, Linkedin, Mail } from "lucide-react"
+import { Github, Linkedin, Mail, Send } from "lucide-react"
 import { motion, useInView } from "framer-motion"
 
 export default function ContactSection() {
@@ -20,7 +20,7 @@ export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: false, amount: 0.2 })
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -33,13 +33,6 @@ export default function ContactSection() {
 
     // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    // In a real application, you would send the form data to your backend
-    // const response = await fetch('/api/contact', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // });
 
     setIsSubmitting(false)
     setSubmitSuccess(true)
@@ -83,21 +76,21 @@ export default function ContactSection() {
   ]
 
   return (
-    <section id="contact" className="py-16" ref={ref}>
+    <section id="contact" className="py-20" ref={ref}>
       <motion.div
         className="max-w-4xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <motion.h2 className="text-3xl font-bold mb-8" variants={itemVariants}>
+        <motion.h2 className="text-3xl md:text-4xl font-bold font-heading mb-16 text-center" variants={itemVariants}>
           Get In Touch
         </motion.h2>
         <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8" variants={containerVariants}>
           <motion.div variants={itemVariants}>
-            <Card className="h-full card-glow">
+            <Card className="h-full card-glow border-primary/10">
               <CardHeader>
-                <CardTitle>Contact Form</CardTitle>
+                <CardTitle className="text-2xl font-heading">Contact Form</CardTitle>
                 <CardDescription>Fill out the form below and I'll get back to you as soon as possible.</CardDescription>
               </CardHeader>
               <CardContent>
@@ -111,7 +104,7 @@ export default function ContactSection() {
                       onChange={handleChange}
                       placeholder="Your name"
                       required
-                      className="bg-background/50 border-blue-500/30 focus:border-blue-500"
+                      className="bg-background/50 border-input focus:border-primary focus:ring-1 focus:ring-primary backdrop-blur-sm"
                     />
                   </div>
                   <div className="space-y-2">
@@ -124,7 +117,7 @@ export default function ContactSection() {
                       onChange={handleChange}
                       placeholder="Your email address"
                       required
-                      className="bg-background/50 border-blue-500/30 focus:border-blue-500"
+                      className="bg-background/50 border-input focus:border-primary focus:ring-1 focus:ring-primary backdrop-blur-sm"
                     />
                   </div>
                   <div className="space-y-2">
@@ -137,17 +130,21 @@ export default function ContactSection() {
                       placeholder="Your message"
                       rows={4}
                       required
-                      className="bg-background/50 border-blue-500/30 focus:border-blue-500"
+                      className="bg-background/50 border-input focus:border-primary focus:ring-1 focus:ring-primary backdrop-blur-sm resize-none"
                     />
                   </div>
-                  <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                    <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" disabled={isSubmitting}>
-                      {isSubmitting ? "Sending..." : "Send Message"}
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button type="submit" className="w-full rounded-full shadow-lg hover:shadow-primary/20" disabled={isSubmitting}>
+                      {isSubmitting ? "Sending..." : (
+                        <span className="flex items-center gap-2">
+                          Send Message <Send className="w-4 h-4 ml-1" />
+                        </span>
+                      )}
                     </Button>
                   </motion.div>
                   {submitSuccess && (
                     <motion.p
-                      className="text-green-400 text-sm mt-2"
+                      className="text-green-500 text-sm mt-2 text-center font-medium bg-green-500/10 py-2 rounded-lg"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
@@ -161,16 +158,16 @@ export default function ContactSection() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Card className="h-full card-glow">
+            <Card className="h-full card-glow border-primary/10">
               <CardHeader>
-                <CardTitle>Connect With Me</CardTitle>
+                <CardTitle className="text-2xl font-heading">Connect With Me</CardTitle>
                 <CardDescription>Feel free to reach out through any of these channels.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 {socialLinks.map((link, index) => (
                   <motion.div
                     key={index}
-                    className="flex items-center"
+                    className="flex items-center p-4 rounded-xl bg-secondary/30 hover:bg-secondary/60 transition-colors border border-transparent hover:border-primary/10"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
@@ -179,14 +176,14 @@ export default function ContactSection() {
                       transition: { duration: 0.2 },
                     }}
                   >
-                    <div className="text-blue-400">
+                    <div className="text-primary mr-4 p-2 bg-primary/10 rounded-full">
                       {link.icon}
                     </div>
                     <a
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-300 hover:text-blue-200 hover:underline transition-colors"
+                      className="text-foreground hover:text-primary transition-colors font-medium"
                     >
                       {link.text}
                     </a>

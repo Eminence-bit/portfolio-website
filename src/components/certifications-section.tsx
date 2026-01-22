@@ -22,14 +22,14 @@ export default function CertificationsSection() {
       {
         title: "AWS Academy Graduate - Cloud Foundations",
         issuer: "Amazon Web Services Training and Certification",
-        date: "May 2025", 
+        date: "May 2025",
         level: "Graduate",
       },
     ],
     "AI/ML & Data Science": [
       {
         title: "AWS Academy Graduate - Machine Learning Foundations",
-        issuer: "Amazon Web Services Training and Certification", 
+        issuer: "Amazon Web Services Training and Certification",
         date: "Apr 2025",
         level: "Graduate",
       },
@@ -56,7 +56,7 @@ export default function CertificationsSection() {
       {
         title: "C Programming and Assembly Language",
         issuer: "NPTEL (IIT/IISc)",
-        date: "2024", 
+        date: "2024",
         level: "Academic",
       },
       {
@@ -72,7 +72,7 @@ export default function CertificationsSection() {
         level: "Career Path",
       },
       {
-        title: "Network Technician Career Path", 
+        title: "Network Technician Career Path",
         issuer: "Cisco",
         date: "Nov 2024",
         level: "Career Path",
@@ -96,47 +96,52 @@ export default function CertificationsSection() {
   }
 
   return (
-    <section id="certifications" className="py-16" ref={ref}>
+    <section id="certifications" className="py-20" ref={ref}>
       <motion.div
         className="max-w-6xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <motion.div className="text-center mb-12" variants={itemVariants}>
-          <h2 className="text-2xl font-bold mb-4">Certifications</h2>
-          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+        <motion.div className="text-center mb-16" variants={itemVariants}>
+          <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">Certifications</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Supporting credentials across cloud computing, AI/ML, and software development
           </p>
         </motion.div>
 
-        <motion.div className="space-y-8" variants={containerVariants}>
+        <motion.div className="space-y-12" variants={containerVariants}>
           {Object.entries(certifications).map(([category, certs], categoryIndex) => (
             <motion.div key={category} variants={itemVariants}>
-              <h3 className="text-xl font-semibold mb-4 text-blue-300">{category}</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <h3 className="text-2xl font-heading font-semibold mb-6 flex items-center gap-3">
+                <span className="w-2 h-8 bg-primary rounded-full inline-block" />
+                {category}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {certs.map((cert, index) => (
                   <motion.div
                     key={index}
                     variants={itemVariants}
                     whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
                   >
-                    <Card className="card-glow h-full">
+                    <Card className="card-glow h-full border-primary/5 hover:border-primary/20">
                       <CardHeader className="pb-3">
-                        <div className="flex items-start justify-between mb-2">
-                          <Award className="h-5 w-5 text-blue-400 flex-shrink-0 mt-1" />
-                          <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30" variant="outline">
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="p-2 bg-primary/10 rounded-lg">
+                            <Award className="h-5 w-5 text-primary flex-shrink-0" />
+                          </div>
+                          <Badge className="bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 border-transparent" variant="secondary">
                             {cert.level}
                           </Badge>
                         </div>
-                        <CardTitle className="text-base leading-tight">{cert.title}</CardTitle>
+                        <CardTitle className="text-base font-semibold leading-tight min-h-[3rem] line-clamp-2">{cert.title}</CardTitle>
                       </CardHeader>
                       <CardContent className="pt-0">
-                        <div className="space-y-2">
-                          <p className="text-xs text-muted-foreground font-medium">
+                        <div className="space-y-3 pt-3 border-t border-border/50">
+                          <p className="text-sm text-muted-foreground font-medium line-clamp-1">
                             {cert.issuer}
                           </p>
-                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <div className="flex items-center gap-2 text-xs text-muted-foreground bg-secondary/30 py-1 px-2 rounded-md w-fit">
                             <Calendar className="h-3 w-3" />
                             <span>Issued {cert.date}</span>
                           </div>
@@ -150,20 +155,19 @@ export default function CertificationsSection() {
           ))}
         </motion.div>
 
-        <motion.div className="text-center mt-12" variants={itemVariants}>
+        <motion.div className="text-center mt-16" variants={itemVariants}>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button variant="outline" className="border-blue-500/30 hover:bg-blue-500/10" asChild>
-              <a 
-                href="https://www.credly.com/users/prajyothnani" 
-                target="_blank" 
+            <Button variant="outline" size="lg" className="rounded-full border-primary/20 hover:bg-primary/5 gap-2 group" asChild>
+              <a
+                href="https://www.credly.com/users/prajyothnani"
+                target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2"
               >
-                <ExternalLink className="h-4 w-4" />
+                <ExternalLink className="h-4 w-4 group-hover:scale-110 transition-transform" />
                 View Credly Badges
               </a>
             </Button>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground bg-secondary/50 py-2 px-4 rounded-full">
               Additional NPTEL certificates available upon request
             </p>
           </div>
