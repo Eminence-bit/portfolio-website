@@ -52,7 +52,7 @@ export default function Header() {
             whileHover={{ scale: 1.05 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <span className="text-xl font-heading font-semibold bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-600">
+            <span className="text-xl font-heading font-semibold bg-clip-text text-transparent bg-gradient-to-r from-primary to-yellow-300">
               G Prajyoth
             </span>
           </motion.div>
@@ -169,9 +169,9 @@ export function HeroSection() {
     <section className="min-h-[90vh] flex flex-col items-center justify-center relative px-4 pt-32">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] animate-blob" />
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px] animate-blob animation-delay-2000" />
-        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px] animate-blob animation-delay-4000" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[100px] animate-blob" />
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-yellow-500/10 rounded-full blur-[100px] animate-blob animation-delay-2000" />
+        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-neutral-800/30 rounded-full blur-[100px] animate-blob animation-delay-4000" />
       </div>
 
       <div className="text-center max-w-5xl mx-auto z-10">
@@ -182,11 +182,11 @@ export function HeroSection() {
         >
           <div className="mb-4 flex justify-center">
             <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20">
-              Available for opportunities
+              Open to Opportunities
             </span>
           </div>
           <h1 className="text-6xl md:text-8xl font-bold font-heading tracking-tight mb-6">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-500 to-purple-600 block pb-2">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-yellow-200 to-yellow-500 block pb-2">
               Prajyoth Gandam
             </span>
           </h1>

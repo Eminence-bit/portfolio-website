@@ -63,7 +63,7 @@ export default function ProjectsSection() {
 
   return (
     <section id="projects" className="py-20 relative" ref={ref}>
-      <div className="absolute top-1/2 left-0 w-full h-[500px] bg-primary/5 -skew-y-3 -z-10" />
+
 
       <motion.div
         className="max-w-6xl mx-auto"

@@ -66,8 +66,8 @@ export default function AnimatedBackground() {
         const pulseOpacity = particle.opacity + Math.sin(particle.pulse) * 0.1
 
         const particleColor = isDark
-          ? `rgba(59, 130, 246, ${pulseOpacity})`
-          : `rgba(37, 99, 235, ${pulseOpacity * 0.5})`
+          ? `rgba(252, 238, 10, ${pulseOpacity})`
+          : `rgba(202, 138, 4, ${pulseOpacity * 0.5})`
 
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
@@ -79,7 +79,7 @@ export default function AnimatedBackground() {
           particle.x, particle.y, 0,
           particle.x, particle.y, particle.size * 6
         )
-        gradient.addColorStop(0, isDark ? 'rgba(59, 130, 246, 0.2)' : 'rgba(37, 99, 235, 0.1)')
+        gradient.addColorStop(0, isDark ? 'rgba(252, 238, 10, 0.2)' : 'rgba(202, 138, 4, 0.1)')
         gradient.addColorStop(1, 'transparent')
 
         ctx.fillStyle = gradient
@@ -107,9 +107,9 @@ export default function AnimatedBackground() {
       <div className="absolute inset-0 bg-background transition-colors duration-500" />
 
       <div className="absolute top-0 left-0 w-full h-full opacity-30">
-        <div className={`absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob ${isDark ? 'bg-purple-900/30' : 'bg-purple-300/30'}`} />
-        <div className={`absolute top-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob animation-delay-2000 ${isDark ? 'bg-blue-900/30' : 'bg-blue-300/30'}`} />
-        <div className={`absolute -bottom-32 left-[20%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob animation-delay-4000 ${isDark ? 'bg-indigo-900/30' : 'bg-indigo-300/30'}`} />
+        <div className={`absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob ${isDark ? 'bg-yellow-500/10' : 'bg-yellow-300/30'}`} />
+        <div className={`absolute top-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob animation-delay-2000 ${isDark ? 'bg-neutral-800/50' : 'bg-gray-300/30'}`} />
+        <div className={`absolute -bottom-32 left-[20%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob animation-delay-4000 ${isDark ? 'bg-primary/10' : 'bg-primary/20'}`} />
       </div>
 
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
